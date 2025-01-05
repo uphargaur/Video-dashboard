@@ -1,27 +1,29 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VideoService {
-  private baseUrl = 'http://localhost:8080/api/';
-  
-  
-  constructor(private http: HttpClient) {}
+  private baseUrl = 'http://localhost:8080/api';
 
+  constructor() {}
+
+  // Fetch a static list of videos (example, page 5)
   getVideos(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}videos?page=5`);  // Static page 2 for initial call
+    const url = `${this.baseUrl}/videos?page=5`;
+    return from(fetch(url).then(response => response.json()));
   }
 
+  // Fetch videos based on the current page
   getVideosByPage(page: number): Observable<any> {
-    const url = `${this.baseUrl}videos?page=${page}`;
-    console.log('Fetching videos from:', url);  // Corrected string interpolation
-    return this.http.get<any>(url);
+    const url = `${this.baseUrl}/videos?page=${page}`;
+    return from(fetch(url).then(response => response.json()));
   }
 
+  // Search for videos based on a search term
   searchVideos(searchTerm: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}search?q=${searchTerm}`);
+    const url = `${this.baseUrl}/search?q=${searchTerm}`;
+    return from(fetch(url).then(response => response.json()));
   }
 }

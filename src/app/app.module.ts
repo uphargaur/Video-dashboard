@@ -4,7 +4,7 @@ import { BrowserModule, provideClientHydration, withEventReplay } from '@angular
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VideoListComponent } from './video-list/video-list.component';
-import { HttpClientModule } from '@angular/common/http'; 
+import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
@@ -14,11 +14,10 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
     FormsModule  
   ],
   providers: [
-    provideClientHydration(withEventReplay())
+    provideHttpClient()
   ],
   bootstrap: [AppComponent]
 })
