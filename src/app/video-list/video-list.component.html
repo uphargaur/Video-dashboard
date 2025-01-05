@@ -1,10 +1,42 @@
-<div class="video-list">
+
+<div class="header">
+    <h1>Hi, I am Uphar!</h1>
+    <p>This is the dashboard utilizing the UI and backend. We are using pagination as shown below, and you can also search for videos.</p>
+  </div>
+
+
+<!-- Search Button and Input -->
+<div class="search-section">
+    <input [(ngModel)]="searchTerm" type="text" placeholder="Search Videos..." />
+    <button (click)="searchVideos()">Search Videos</button>
+  </div>
+  
+<div class="video-list-scroll">
     <div *ngFor="let video of videos" class="video-item">
-      <img [src]="video.Thumbnail" alt="{{ video.Title }}" />
-      <h3>{{ video.Title }}</h3>
-      <p>{{ video.Description || 'No description available' }}</p>
-      <p><strong>Published At:</strong> {{ video.PublishedAt | date }}</p>
-      <a [href]="'https://www.youtube.com/watch?v=' + video.VideoID" target="_blank">Watch Video</a>
+      <div class="video-info">
+        <img [src]="video.Thumbnail" alt="{{ video.Title }}" />
+        <div class="video-details">
+          <h3>{{ video.Title }}</h3>
+          <p>{{ video.Description || 'No description available' }}</p>
+          <p><strong>Published At:</strong> {{ video.PublishedAt | date }}</p>
+          <a [href]="'https://www.youtube.com/watch?v=' + video.VideoID" target="_blank">Watch Video</a>
+        </div>
+      </div>
     </div>
   </div>
+  
+  <!-- Pagination Controls -->
+  <div class="pagination">
+    <button (click)="updatePage(currentPage - 1)" [disabled]="currentPage === 1">
+      Previous
+    </button>
+  
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  
+    <button (click)="updatePage(currentPage + 1)" [disabled]="currentPage === totalPages">
+      Next
+    </button>
+  </div>
+  
+
   
