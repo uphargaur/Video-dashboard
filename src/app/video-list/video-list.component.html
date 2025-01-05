@@ -1,0 +1,10 @@
+<div class="video-list">
+    <div *ngFor="let video of videos" class="video-item">
+      <img [src]="video.Thumbnail" alt="{{ video.Title }}" />
+      <h3>{{ video.Title }}</h3>
+      <p>{{ video.Description || 'No description available' }}</p>
+      <p><strong>Published At:</strong> {{ video.PublishedAt | date }}</p>
+      <a [href]="'https://www.youtube.com/watch?v=' + video.VideoID" target="_blank">Watch Video</a>
+    </div>
+  </div>
+  
